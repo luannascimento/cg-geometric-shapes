@@ -1,3 +1,4 @@
 *.o
 cg-geometric-shapes
 /.vscode
+log.txt

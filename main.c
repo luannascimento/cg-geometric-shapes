@@ -17,6 +17,8 @@ GLfloat deltaT;
 GLuint rdiv = 16,hdiv = 16;
 GLfloat r = 0.0;
 GLfloat rot = 0.0;
+int bmp[5] = {1,2,3,4,5};
+int img[4] = {0,1,2,3};
 
 void init();
 void display();
@@ -44,10 +46,16 @@ int main(int argc, char* argv[])
 
 void init()
 {
-  glClearColor(1.0,1.0,1.0,1.0);
+  glClearColor(0.0,0.0,0.0,0.0);
   moveCamera = STOP;
   glEnable(GL_DEPTH_TEST);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  textureInit(5);
+  loadBitmap("bmp/t.bmp");
+  loadBitmap("bmp/tt.bmp");
+  loadBitmap("bmp/ttt.bmp");
+  loadBitmap("bmp/tttt.bmp");
+  loadBitmap("bmp/ttttt.bmp");
 }
 
 void display()
@@ -63,11 +71,11 @@ void display()
     glRotated(r,1.0,0.0,0.0);
     glTranslated(0.0,-1,0.0);
     if(moveCamera == CYLINDER)
-      drawCone(1,2,rdiv,hdiv);
+      drawCone(1,2,rdiv,hdiv,getTexture(bmp[img[2]]));
     else if(moveCamera == CONE)
-      drawSphere(2,rdiv,hdiv);
+      drawSphere(2,rdiv,hdiv,getTexture(bmp[img[0]]));
     else
-      drawCylinder(1,2,rdiv,hdiv);
+      drawCylinder(1,2,rdiv,hdiv,getTexture(bmp[img[1]]));
   glPopMatrix();
 
   glPushMatrix();
@@ -75,11 +83,11 @@ void display()
     glRotated(r,1.0,0.0,0.0);
     glTranslated(0.0,-1,0.0);
     if(moveCamera == CYLINDER)
-      drawSphere(2,rdiv,hdiv);
+      drawSphere(2,rdiv,hdiv,getTexture(bmp[img[0]]));
     else if(moveCamera == CONE)
-      drawCylinder(1,2,rdiv,hdiv);
+      drawCylinder(1,2,rdiv,hdiv,getTexture(bmp[img[1]]));
     else
-      drawCone(1,2,rdiv,hdiv);
+      drawCone(1,2,rdiv,hdiv,getTexture(bmp[img[2]]));
       
   glPopMatrix();
 
@@ -88,11 +96,11 @@ void display()
     glRotated(r,1.0,0.0,0.0);
     glTranslated(0.0,-1,0.0);
     if(moveCamera == CYLINDER)
-      drawCylinder(1,2,rdiv,hdiv);
+      drawCylinder(1,2,rdiv,hdiv,getTexture(bmp[img[1]]));
     else if(moveCamera == CONE)
-      drawCone(1,2,rdiv,hdiv);
+      drawCone(1,2,rdiv,hdiv,getTexture(bmp[img[2]]));
     else
-      drawSphere(2,rdiv,hdiv);
+      drawSphere(2,rdiv,hdiv,getTexture(bmp[img[0]]));
   glPopMatrix();
 
   glFlush();
@@ -127,6 +135,9 @@ void keyboard(unsigned char key,int x,int y)
 {
   switch(key)
   {
+    case 27:
+      exit(EXIT_FAILURE);
+      break;
     case 'q':
         r+=10;
       break;
@@ -141,6 +152,16 @@ void keyboard(unsigned char key,int x,int y)
       break;
     case 'h':
         hdiv--;
+      break;
+    case 't':
+      if(moveCamera == SPHERE)
+        img[0] = (img[0] >= 4) ? 0 : img[0]+1;
+      
+      if(moveCamera == CYLINDER)
+        img[1] = (img[1] >= 4) ? 0 : img[1]+1;
+
+      if(moveCamera == CONE)
+        img[2] = (img[2] >= 4) ? 0 : img[2]+1;
       break;
   }
 }

@@ -3,9 +3,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <inttypes.h>
+#include <time.h>
+#include <stdarg.h>
 #include <GL/glut.h>
 #include <GL/glu.h>
 #include <GL/gl.h>
+#include "logging.h"
+#include "texture.h"
 #include "sphere.h"
 #include "cylinder.h"
 #include "cone.h"
