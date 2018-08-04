@@ -10,4 +10,5 @@
 #include "cylinder.h"
 #include "cone.h"
 #include "geometric.h"
+#include "toroid.h"
 #endif
