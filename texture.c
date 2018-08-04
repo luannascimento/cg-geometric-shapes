@@ -203,7 +203,7 @@ GLuint loadBitmap( char* fileName )
 
   fclose(fp);
 
-  printf("\nCABEÇALHO FILE BITMAP\n");
+  /* printf("\nCABEÇALHO FILE BITMAP\n");
   printf("Nome do arquivo: %s\n", fileName);
   printf("Tipo do arquivo: %X\n", bitmapFileHeader.bfType);
   printf("Tamanho do arquivo: %d bytes\n", bitmapFileHeader.bfSize);
@@ -222,7 +222,7 @@ GLuint loadBitmap( char* fileName )
   printf("Resolução horizontal em pixels por metro: %d\n",bitmapInfoHeader.biXPelsPerMeter);
   printf("Resolução vertical em pixels por metro: %d\n",bitmapInfoHeader.biYPelsPerMeter);
   printf("Número de cores usadas na imagem: %d\n",bitmapInfoHeader.biClrUsed);
-  printf("Número de cores importantes: %d\n\n",bitmapInfoHeader.biClrImportant);
+  printf("Número de cores importantes: %d\n\n",bitmapInfoHeader.biClrImportant); */
   
   texture_num++;
   glBindTexture(GL_TEXTURE_2D, texture_num);
