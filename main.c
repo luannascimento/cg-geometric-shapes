@@ -9,7 +9,8 @@ enum
   STOP = 0,
   SPHERE,
 	CYLINDER,
-	CONE
+	CONE,
+  TOROID
 } moveCamera;
 
 GLfloat x = 0.0f, z = 12.0f, lx = 0.0f, lz = -1.0f, angle = 0.0f;
@@ -64,18 +65,33 @@ void display()
   
   glLoadIdentity();
   gluLookAt(	x, 1.0f, z, x+lx, 1.0f,  z+lz, 0.0f, 1.0f,  0.0f);
-  
+
+  glPushMatrix();
+    glTranslated(0.0,0.0,-(12*(sqrt(3)/3))-(12*(sqrt(3)/6)));
+    glRotated(r,1.0,0.0,0.0);
+    glTranslated(0.0,-1,0.0);
+    if(moveCamera == CYLINDER)
+      drawCone(1,2,rdiv,hdiv,getTexture(bmp[img[2]]));
+    else if(moveCamera == CONE)
+      drawCylinder(1,2,rdiv,hdiv,getTexture(bmp[img[1]]));
+    else if(moveCamera == SPHERE)
+      drawToroid(1,1,rdiv,hdiv);
+    else
+      drawSphere(2,rdiv,hdiv,getTexture(bmp[img[0]]));
+  glPopMatrix();
 
   glPushMatrix();
     glTranslated(6.0,0.0,-(12*(sqrt(3)/6)));
     glRotated(r,1.0,0.0,0.0);
     glTranslated(0.0,-1,0.0);
     if(moveCamera == CYLINDER)
-      drawCone(1,2,rdiv,hdiv,getTexture(bmp[img[2]]));
-    else if(moveCamera == CONE)
       drawSphere(2,rdiv,hdiv,getTexture(bmp[img[0]]));
-    else
+    else if(moveCamera == CONE)
+      drawToroid(1,1,rdiv,hdiv);
+    else if(moveCamera == SPHERE)
       drawCylinder(1,2,rdiv,hdiv,getTexture(bmp[img[1]]));
+    else
+      drawCone(1,2,rdiv,hdiv,getTexture(bmp[img[2]]));
   glPopMatrix();
 
   glPushMatrix();
@@ -83,12 +99,13 @@ void display()
     glRotated(r,1.0,0.0,0.0);
     glTranslated(0.0,-1,0.0);
     if(moveCamera == CYLINDER)
-      drawSphere(2,rdiv,hdiv,getTexture(bmp[img[0]]));
+      drawToroid(1,1,rdiv,hdiv);
     else if(moveCamera == CONE)
-      drawCylinder(1,2,rdiv,hdiv,getTexture(bmp[img[1]]));
-    else
+      drawSphere(2,rdiv,hdiv,getTexture(bmp[img[0]]));
+    else if(moveCamera == SPHERE)
       drawCone(1,2,rdiv,hdiv,getTexture(bmp[img[2]]));
-      
+    else
+      drawCylinder(1,2,rdiv,hdiv,getTexture(bmp[img[1]]));
   glPopMatrix();
 
   glPushMatrix();
@@ -99,10 +116,12 @@ void display()
       drawCylinder(1,2,rdiv,hdiv,getTexture(bmp[img[1]]));
     else if(moveCamera == CONE)
       drawCone(1,2,rdiv,hdiv,getTexture(bmp[img[2]]));
-    else
+    else if(moveCamera == SPHERE)
       drawSphere(2,rdiv,hdiv,getTexture(bmp[img[0]]));
+    else 
+      drawToroid(1,1,rdiv,hdiv);
   glPopMatrix();
-
+  
   glFlush();
   glutSwapBuffers();
 }
@@ -178,5 +197,8 @@ void keyboard2(int key,int mouse_x,int mouse_y)
 		case GLUT_KEY_F3 :
       moveCamera = CONE;
 			break;
+    case GLUT_KEY_F4 :
+      moveCamera = TOROID;
+      break;
 	}
 }
