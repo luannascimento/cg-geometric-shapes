@@ -75,7 +75,7 @@ void display()
     else if(moveCamera == CONE)
       drawCylinder(1,2,rdiv,hdiv,getTexture(bmp[img[1]]));
     else if(moveCamera == SPHERE)
-      drawToroid(1,1,rdiv,hdiv);
+      drawToroid(1,1,rdiv,hdiv,getTexture(bmp[img[3]]));
     else
       drawSphere(2,rdiv,hdiv,getTexture(bmp[img[0]]));
   glPopMatrix();
@@ -87,7 +87,7 @@ void display()
     if(moveCamera == CYLINDER)
       drawSphere(2,rdiv,hdiv,getTexture(bmp[img[0]]));
     else if(moveCamera == CONE)
-      drawToroid(1,1,rdiv,hdiv);
+      drawToroid(1,1,rdiv,hdiv,getTexture(bmp[img[3]]));
     else if(moveCamera == SPHERE)
       drawCylinder(1,2,rdiv,hdiv,getTexture(bmp[img[1]]));
     else
@@ -99,7 +99,7 @@ void display()
     glRotated(r,1.0,0.0,0.0);
     glTranslated(0.0,-1,0.0);
     if(moveCamera == CYLINDER)
-      drawToroid(1,1,rdiv,hdiv);
+      drawToroid(1,1,rdiv,hdiv,getTexture(bmp[img[3]]));
     else if(moveCamera == CONE)
       drawSphere(2,rdiv,hdiv,getTexture(bmp[img[0]]));
     else if(moveCamera == SPHERE)
@@ -119,7 +119,7 @@ void display()
     else if(moveCamera == SPHERE)
       drawSphere(2,rdiv,hdiv,getTexture(bmp[img[0]]));
     else 
-      drawToroid(1,1,rdiv,hdiv);
+      drawToroid(1,1,rdiv,hdiv,getTexture(bmp[img[3]]));
   glPopMatrix();
   
   glFlush();
@@ -181,6 +181,9 @@ void keyboard(unsigned char key,int x,int y)
 
       if(moveCamera == CONE)
         img[2] = (img[2] >= 4) ? 0 : img[2]+1;
+      
+      if(moveCamera == TOROID)
+        img[3] = (img[3] >= 4) ? 0 : img[3]+1;
       break;
   }
 }
