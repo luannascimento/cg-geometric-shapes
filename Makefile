@@ -6,7 +6,7 @@ LIBS = -lm -lGL -lGLU -lglut
 
 NAME = cg-geometric-shapes
 
-OBJECTS = main.o geometric.o sphere.o cylinder.o cone.o toroid.o logging.o texture.o
+OBJECTS = main.o sphere.o cylinder.o cone.o toroid.o logging.o texture.o
 
 .SUFFIXES: .c
 .c.o:

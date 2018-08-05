@@ -16,7 +16,14 @@ void drawSphere(GLdouble D,GLint rdiv, GLint hdiv, GLuint texture)
     H_ = D - delta_h;
     theta = i * delta;
     theta_ = theta + delta;
-    drawTriangle(r_,D,H_,theta,theta_);
+    glBegin(GL_TRIANGLE_FAN);
+      glTexCoord2f(0.5,1.0);
+      glVertex3f(0.0,D,0.0);
+      glTexCoord2f(theta/(2*M_PI), H_/D);
+      glVertex3f(r_ * cos(theta),  H_, r_ * sin(theta));
+      glTexCoord2f(theta_/(2*M_PI), H_/D);
+      glVertex3f(r_ * cos(theta_),  H_, r_ * sin(theta_));
+    glEnd();
     
     for (j = 1; j < hdiv-1; j++)
     {
@@ -24,11 +31,27 @@ void drawSphere(GLdouble D,GLint rdiv, GLint hdiv, GLuint texture)
       H__ = H_ + delta_h;
       r_ = sqrt((raio * raio) - (raio - H_) * (raio - H_));
       r__ = sqrt((raio * raio) - (raio - H__) * (raio - H__));
-      drawQuad(r_,r__,D,H_,H__,theta,theta_);
+      glBegin(GL_QUADS);
+        glTexCoord2f(theta/(2*M_PI), H_/D);
+        glVertex3f(r_ * cos(theta), H_, r_ * sin(theta));
+        glTexCoord2f(theta/(2*M_PI), H__/D);
+        glVertex3f(r__ * cos(theta), H__, r__ * sin(theta));
+        glTexCoord2f(theta_/(2*M_PI), H__/D);
+        glVertex3f(r__ * cos(theta_), H__, r__ * sin(theta_));
+        glTexCoord2f(theta_/(2*M_PI), H_/D);
+        glVertex3f(r_ * cos(theta_), H_, r_ * sin(theta_));
+      glEnd();
     }
     r_ = sqrt(raio * raio - (raio - (D - delta_h)) * (raio - (D - delta_h)));
     H_ = delta_h;
-    drawTriangle(r_,0.0,H_,theta,theta_);
+    glBegin(GL_TRIANGLE_FAN);
+      glTexCoord2f(0.5,0.0);
+      glVertex3f(0.0,0.0,0.0);
+      glTexCoord2f(theta/(2*M_PI), H_/D);
+      glVertex3f(r_ * cos(theta),  H_, r_ * sin(theta));
+      glTexCoord2f(theta_/(2*M_PI), H_/D);
+      glVertex3f(r_ * cos(theta_),  H_, r_ * sin(theta_));
+    glEnd();
   }
   glDisable(GL_TEXTURE_2D);
 }
