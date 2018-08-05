@@ -231,9 +231,9 @@ void tranSuaveRotate ()
     {
       if(rotate == ty)
       {
-        if((ry+0.001) < 1.0){
-          ry += 0.001;
-          rx-= 0.001;
+        if((ry+0.0017) < 1.0){
+          ry += 0.0017;
+          rx-= 0.0017;
         }
         else{
           moveRotate = 0;
@@ -245,9 +245,9 @@ void tranSuaveRotate ()
       }
       else if(rotate == tz)
       {
-        if((rz+0.001) < 1.0){
-          rz += 0.001;
-          rx-= 0.001;
+        if((rz+0.0017) < 1.0){
+          rz += 0.0017;
+          rx-= 0.0017;
         }
         else{
           moveRotate = 0;
@@ -262,9 +262,9 @@ void tranSuaveRotate ()
     {
       if(rotate == tx)
       {
-        if((rx+0.001) < 1.0){
-          rx += 0.001;
-          ry-= 0.001;
+        if((rx+0.0017) < 1.0){
+          rx += 0.0017;
+          ry-= 0.0017;
         }
         else{
           moveRotate = 0;
@@ -276,9 +276,9 @@ void tranSuaveRotate ()
       }
       else if(rotate == tz)
       {
-        if((rz+0.001) < 1.0){
-          rz += 0.001;
-          ry-= 0.001;
+        if((rz+0.0017) < 1.0){
+          rz += 0.0017;
+          ry-= 0.0017;
         }
         else{
           moveRotate = 0;
@@ -293,9 +293,9 @@ void tranSuaveRotate ()
     {
       if(rotate == tx)
       {
-        if((rx+0.001) < 1.0){
-          rx += 0.001;
-          rz-= 0.001;
+        if((rx+0.0017) < 1.0){
+          rx += 0.0017;
+          rz-= 0.0017;
         }
         else{
           moveRotate = 0;
@@ -307,9 +307,9 @@ void tranSuaveRotate ()
       }
       else if(rotate == ty)
       {
-        if((ry+0.001) < 1.0){
-          ry += 0.001;
-          rz-= 0.001;
+        if((ry+0.0017) < 1.0){
+          ry += 0.0017;
+          rz-= 0.0017;
         }
         else{
           moveRotate = 0;
