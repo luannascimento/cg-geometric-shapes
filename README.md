@@ -49,9 +49,6 @@ make clean
 |**x**| Rotação no Eixo X |
 |**y**| Rotação no Eixo Y |
 |**z**| Rotação no Eixo Z |
-|**b**| Ativa a Rotação no Eixo X |
-|**n**| Ativa a Rotação no Eixo Y |
-|**m**| Ativa a Rotação no Eixo Z |
 |**R**| Aumenta as divisões Radias |
 |**r**| Diminui as divisões Radias |
 |**H**| Aumenta as divisões de Altura |

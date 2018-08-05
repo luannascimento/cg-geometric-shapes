@@ -13,6 +13,13 @@ enum
   TOROID
 } moveCamera;
 
+enum
+{
+  tx = 0,
+	ty,
+	tz
+} rotate;
+
 GLfloat deltaT;
 GLuint rdiv = 16,hdiv = 16;
 GLfloat r = 0.0;
@@ -22,6 +29,8 @@ int img[4] = {0,1,2,3};
 int mov = 0;
 GLfloat graus = 90.0f;
 GLfloat rx = 1.0,ry = 0.0,rz = 0.0;
+int moveRotate = 0;
+int moveActiveRotate = 0;
 
 void init();
 void display();
@@ -29,6 +38,7 @@ void keyboard(unsigned char,int,int);
 void keyboard2(int,int,int);
 void reshape(GLsizei,GLsizei);
 void timer(int);
+void tranSuaveRotate();
 
 int main(int argc, char* argv[])
 {
@@ -51,6 +61,7 @@ void init()
 {
   glClearColor(0.0,0.0,0.0,0.0);
   moveCamera = STOP;
+  rotate = tx;
   glEnable(GL_DEPTH_TEST);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   textureInit(5);
@@ -120,10 +131,9 @@ void timer(int value)
       graus+=90.0;
     }
   }
-    
   
+  tranSuaveRotate();
   
-
   glutPostRedisplay();
   lastTime = currentTime;
   glutTimerFunc( TIMERMSECS, timer, 0 );
@@ -179,28 +189,16 @@ void keyboard(unsigned char key,int x,int y)
       mov = 1;
       break;
     case 'x':
-      rx = 1.0;
-      ry = 0.0;
-      rz = 0.0;
+      rotate = tx;
+      moveRotate = 1;
       break;
     case 'y':
-      rx = 0.0;
-      ry = 1.0;
-      rz = 0.0;
+      rotate = ty;
+      moveRotate = 1;
       break;
     case 'z':
-      rx = 0.0;
-      ry = 0.0;
-      rz = 1.0;
-      break;
-    case 'b':
-      rx = 1.0;
-      break;
-    case 'n':
-      ry = 1.0;
-      break;
-    case 'm':
-      rz = 1.0;
+      rotate = tz;
+      moveRotate = 1;
       break;
   }
 }
@@ -221,4 +219,106 @@ void keyboard2(int key,int mouse_x,int mouse_y)
       moveCamera = TOROID;
       break;
 	}
+}
+
+void tranSuaveRotate ()
+{
+  static int ax = 1.0, by = 0.0, cz = 0.0;
+
+  if(moveRotate == 1)
+  {
+    if(ax == 1)
+    {
+      if(rotate == ty)
+      {
+        if((ry+0.001) < 1.0){
+          ry += 0.001;
+          rx-= 0.001;
+        }
+        else{
+          moveRotate = 0;
+          rx = 0.0;
+          ry = 1.0;
+          ax = 0;
+          by = 1;
+        }
+      }
+      else if(rotate == tz)
+      {
+        if((rz+0.001) < 1.0){
+          rz += 0.001;
+          rx-= 0.001;
+        }
+        else{
+          moveRotate = 0;
+          rx = 0.0;
+          rz = 1.0;
+          cz = 1;
+          ax = 0;
+        }
+      }
+    }
+    else if(by == 1)
+    {
+      if(rotate == tx)
+      {
+        if((rx+0.001) < 1.0){
+          rx += 0.001;
+          ry-= 0.001;
+        }
+        else{
+          moveRotate = 0;
+          ry = 0.0;
+          rx = 1.0;
+          by = 0;
+          ax = 1;
+        }
+      }
+      else if(rotate == tz)
+      {
+        if((rz+0.001) < 1.0){
+          rz += 0.001;
+          ry-= 0.001;
+        }
+        else{
+          moveRotate = 0;
+          ry = 0.0;
+          rz = 1.0;
+          cz = 1;
+          by = 0;
+        }
+      }
+    }
+    else if(cz == 1)
+    {
+      if(rotate == tx)
+      {
+        if((rx+0.001) < 1.0){
+          rx += 0.001;
+          rz-= 0.001;
+        }
+        else{
+          moveRotate = 0;
+          rz = 0.0;
+          rx = 1.0;
+          cz = 0;
+          ax = 1;
+        }
+      }
+      else if(rotate == ty)
+      {
+        if((ry+0.001) < 1.0){
+          ry += 0.001;
+          rz-= 0.001;
+        }
+        else{
+          moveRotate = 0;
+          rz = 0.0;
+          ry = 1.0;
+          cz = 0;
+          by = 1;
+        }
+      }
+    }
+  }
 }
