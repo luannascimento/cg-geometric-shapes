@@ -17,7 +17,7 @@ void drawSphere(GLdouble D,GLint rdiv, GLint hdiv, GLuint texture)
     theta = i * delta;
     theta_ = theta + delta;
     glBegin(GL_TRIANGLE_FAN);
-      glTexCoord2f(0.5,1.0);
+      glTexCoord2f(theta/(2*M_PI),1.0);
       glVertex3f(0.0,D,0.0);
       glTexCoord2f(theta/(2*M_PI), H_/D);
       glVertex3f(r_ * cos(theta),  H_, r_ * sin(theta));
@@ -45,7 +45,7 @@ void drawSphere(GLdouble D,GLint rdiv, GLint hdiv, GLuint texture)
     r_ = sqrt(raio * raio - (raio - (D - delta_h)) * (raio - (D - delta_h)));
     H_ = delta_h;
     glBegin(GL_TRIANGLE_FAN);
-      glTexCoord2f(0.5,0.0);
+      glTexCoord2f(theta/(2*M_PI),0.0);
       glVertex3f(0.0,0.0,0.0);
       glTexCoord2f(theta/(2*M_PI), H_/D);
       glVertex3f(r_ * cos(theta),  H_, r_ * sin(theta));

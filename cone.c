@@ -16,7 +16,7 @@ void drawCone(GLdouble R,GLdouble H,GLuint rdiv,GLuint hdiv,GLuint texture)
     H_ = H - delta_h;
     r_ = R/(GLfloat)hdiv;
     glBegin(GL_TRIANGLE_FAN);
-      glTexCoord2f(0.5,1.0);
+      glTexCoord2f(theta/(2*M_PI),1.0);
       glVertex3f(0.0,H,0.0);
       glTexCoord2f(theta/(2*M_PI),H_/H);
       glVertex3f(r_ * cos(theta),  H_, r_ * sin(theta));
